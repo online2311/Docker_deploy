@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+
+  web:
+    restart: always
+    image: v2cc/proxypanel
+    volumes:
+      - ./.caddy:/root/.caddy
+      - ./storage:/www/wwwroot/proxypanel/storage
+    env_file: ./env
+    ports:
+      - "80:80"
+    links:
+      - db
+      - redis
+  
+  db:
+    image: mysql:5.7
+    restart: always
+    env_file: ./env
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+  
+  redis:
+    image: redis:5.0
+    restart: always
