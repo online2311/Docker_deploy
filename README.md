@@ -7,9 +7,23 @@
 install_dir="/www/wwwroot/proxypanel" \
 bash <(curl -L https://raw.githubusercontent.com/ColetteContreras/proxypanel-docker/main/install.sh)
 ```
+
+**cd /www/wwwroot/proxypanel**
+
 ### Update
 
 ```
-cd /www/wwwroot/proxypanel
 dc pull && dc up -d
+```
+
+### Restart
+
+```
+dc restart web
+```
+
+### Show logs
+
+```
+dc logs -f web
 ```
