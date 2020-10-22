@@ -1,4 +1,22 @@
-curl -fsSL https://get.docker.com | bash
+function installDocker {
+  which docker
+
+  if [ $? -eq 0 ]
+  then
+      docker --version | grep "Docker version"
+      if [ $? -eq 0 ]
+      then
+          echo "docker existing"
+      else
+          curl -fsSL https://get.docker.com | bash
+      fi
+  else
+      curl -fsSL https://get.docker.com | bash
+  fi
+}
+
+installDocker
+
 curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod a+x /usr/local/bin/docker-compose
 rm -rf `which dc`
