@@ -23,8 +23,8 @@ rm -rf `which dc`
 ln -s /usr/local/bin/docker-compose /usr/bin/dc
 
 mkdir -p ${install_dir} && cd ${install_dir}
-curl -fsSL https://raw.githubusercontent.com/ColetteContreras/proxypanel-docker/main/docker-compose.yml -o docker-compose.yml
-curl -fsSL https://raw.githubusercontent.com/ColetteContreras/proxypanel-docker/main/env -o env
+curl -fsSL https://raw.githubusercontent.com/proxypanel/Docker_deploy/main/docker-compose.yml -o docker-compose.yml
+curl -fsSL https://raw.githubusercontent.com/proxypanel/Docker_deploy/main/env -o env
 
 mysqlPW="$(openssl rand -hex 12)"
 
