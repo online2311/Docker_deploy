@@ -4,7 +4,7 @@ services:
 
   web:
     restart: always
-    image: v2cc/proxypanel
+    image: brettonye/proxypanel
     volumes:
       - ./.caddy:/root/.caddy
       - ./storage:/www/wwwroot/proxypanel/storage
@@ -14,14 +14,14 @@ services:
     links:
       - db
       - redis
-  
+
   db:
     image: mysql:5.7
     restart: always
     env_file: ./env
     volumes:
       - ./mysql_data:/var/lib/mysql
-  
+
   redis:
     image: redis:5.0
     restart: always
