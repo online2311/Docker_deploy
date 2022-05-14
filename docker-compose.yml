@@ -4,10 +4,10 @@ services:
 
   web:
     restart: always
-    image: brettonye/proxypanel
+    image: nodecloud/proxypanel
     volumes:
       - ./.caddy:/root/.caddy
-      - ./storage:/www/wwwroot/proxypanel/storage
+      - storage_data:/www/wwwroot/proxypanel/storage
       - ./env:/www/wwwroot/proxypanel/.env
     ports:
       - "80:80"
@@ -16,12 +16,21 @@ services:
       - redis
 
   db:
-    image: mysql:5.7
+    image: mysql:oracle
     restart: always
     env_file: ./env
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
 
   redis:
-    image: redis:5.0
+    image: redis:7
+    volumes:
+      - redis_data:/data
+    entrypoint: redis-server --appendonly yes
     restart: always
+
+
+volumes:
+  db_data:
+  redis_data:
+  storage_data:
