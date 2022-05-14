@@ -32,7 +32,7 @@ sed -i "s|APP_KEY=placeholder|APP_KEY=base64:$(openssl rand -base64 32)|" env
 sed -i "s|MYSQL_ROOT_PASSWORD=proxypanel|MYSQL_ROOT_PASSWORD=${mysqlPW}|" env
 sed -i "s|DB_PASSWORD=proxypanel|DB_PASSWORD=${mysqlPW}|" env
 
-dc pull && dc up -d && dc exec -it web php artisan migrate --seed --force
+dc pull && dc up -d && sleep 10 && dc exec -it web php artisan migrate --seed --force
 
 echo "MySQL root password: ${mysqlPW}"
 echo "Show logs: cd ${install_dir} && dc logs -f web"
