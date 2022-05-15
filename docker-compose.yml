@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
   web:
     restart: always
     image: nodecloud/proxypanel
@@ -9,8 +8,6 @@ services:
       - ./.caddy:/root/.caddy
       - storage_data:/www/wwwroot/proxypanel/storage
       - ./env:/www/wwwroot/proxypanel/.env
-    ports:
-      - "80:80"
     links:
       - db
       - redis
@@ -29,8 +26,17 @@ services:
     entrypoint: redis-server --appendonly yes
     restart: always
 
+  cloudflared:
+    image: milgradesec/cloudflared:latest
+    restart: always
+    volumes:
+      - cloudflared:/etc/cloudflared
+    command: 'tunnel --no-autoupdate run --token **token**'
+    links:
+      - web
 
 volumes:
   db_data:
   redis_data:
   storage_data:
+  cloudflared:
